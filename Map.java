@@ -41,8 +41,11 @@ public class Map
         nodeList = new ArrayList<>();
         for(int i = 0; i < numNodes; i++)
         {
+            int rand_xPos = rand.nextInt(10);
+            int rand_yPos = rand.nextInt(10);
+
             String nodeName = Character.toString(nameList.get(i));
-            NodeData newNode = new NodeData(nodeName);
+            NodeData newNode = new NodeData(nodeName, rand_xPos, rand_yPos);
             nodeList.add(newNode);
         }
     }
@@ -56,7 +59,6 @@ public class Map
         for(int i = 0; i < numNodes; i++)
         {
             int rand_node = rand.nextInt(rand_numNodes);
-            int rand_distance = rand.nextInt(20);
 
             while(nodeList.get(i).getName() == endNodeList.get(rand_node).getName())
             {
@@ -64,7 +66,7 @@ public class Map
             }
 
             nodeList.get(i).getPath().setEndNode(endNodeList.get(rand_node));
-            nodeList.get(i).getPath().setDistance(rand_distance);
+            nodeList.get(i).getPath().setDistance();
             endNodeList.remove(rand_node);
 
             rand_numNodes -= 1;
@@ -83,9 +85,10 @@ public class Map
     {
         for(int i = 0; i < numNodes; i++)
         {
-            String nodeName = nodeList.get(i).getPath().getEndNode().getName();
+            String startNode = nodeList.get(i).getPath().getStartNode().getName();
+            String endName = nodeList.get(i).getPath().getEndNode().getName();
             int nodeDistance = nodeList.get(i).getPath().getDistance();
-            System.out.printf("%s --> %d\n", nodeName, nodeDistance);
+            System.out.printf("%s -- > %s = %d\n", startNode, endName, nodeDistance);
         }
         
     }

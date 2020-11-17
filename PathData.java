@@ -5,17 +5,17 @@ public class PathData
     private NodeData endNode;
 
     public PathData()
-    {
-        distance = 0;
+    {     
         startNode = new NodeData();
         endNode = new NodeData();
+        distance = 0;
     }
 
     public PathData(NodeData startNode)
     {
-        distance = 0;
         this.startNode = startNode;
         this.endNode = startNode;
+        distance = 0;
     }
     
     // Copy Constructor
@@ -33,9 +33,15 @@ public class PathData
         endNode = new NodeData(endNode);
     }
 
-    public void setDistance(int distance)
+    public void setDistance()
     {
-        this.distance = distance;
+        int x1 = startNode.getXPos();
+        int x2 = endNode.getXPos();
+        int y1 = startNode.getYPos();
+        int y2 = endNode.getYPos();
+
+        double sum = Math.pow((x2 - x1), 2.0) + Math.pow((y2 - y1), 2.0);
+        this.distance = (int) Math.sqrt(sum);
     }
 
     public int getDistance()
