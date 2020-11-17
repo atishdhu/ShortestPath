@@ -6,26 +6,38 @@ public class NodeData
     public NodeData()
     {
         name = "";
-        path = new path();
+        path = new PathData();
+    }
+
+    public NodeData(String name)
+    {
+        this.name = name;
+        path = new PathData(this);
     }
 
     // Copy Constructor
     public NodeData(NodeData node)
     {
         name = node.name;
-        path = node.path;
     }
 
-    public NodeData(String name)
+    public NodeData(PathData path)
     {
-        this.name = name;
-        path = new path();
+        this.path = new PathData(path);
     }
 
-    public NodeData(String name, PathData path)
+    public String getName()
     {
-        this.name = name;
-        PathData(path);
+        return name;
     }
 
+    public void setPath(PathData path)
+    {
+        this.path = new PathData(path);
+    }
+
+    public PathData getPath()
+    {
+        return path;
+    }
 }

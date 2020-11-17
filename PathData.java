@@ -11,6 +11,13 @@ public class PathData
         endNode = new NodeData();
     }
 
+    public PathData(NodeData startNode)
+    {
+        distance = 0;
+        this.startNode = startNode;
+        this.endNode = startNode;
+    }
+    
     // Copy Constructor
     public PathData(PathData path)
     {
@@ -25,4 +32,30 @@ public class PathData
         startNode = new NodeData(startNode);
         endNode = new NodeData(endNode);
     }
+
+    public void setDistance(int distance)
+    {
+        this.distance = distance;
+    }
+
+    public void setStartNode(NodeData startNode)
+    {
+        this.startNode = new NodeData(startNode);
+    }
+
+    public void setEndNode(NodeData endNode)
+    {
+        this.endNode = new NodeData(endNode);
+    }
+    
+    public NodeData getStartNode()
+    {
+        return startNode;
+    }
+
+    public NodeData getEndNode()
+    {
+        return endNode;
+    }
+
 }
