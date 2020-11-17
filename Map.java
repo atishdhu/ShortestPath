@@ -52,11 +52,11 @@ public class Map
         endNodeList = new ArrayList<>(nodeList);
 
         int rand_numNodes = numNodes;
-        int rand_distance = rand.nextInt(20);
-
+        
         for(int i = 0; i < numNodes; i++)
         {
             int rand_node = rand.nextInt(rand_numNodes);
+            int rand_distance = rand.nextInt(20);
 
             while(nodeList.get(i).getName() == endNodeList.get(rand_node).getName())
             {
@@ -64,6 +64,7 @@ public class Map
             }
 
             nodeList.get(i).getPath().setEndNode(endNodeList.get(rand_node));
+            nodeList.get(i).getPath().setDistance(rand_distance);
             endNodeList.remove(rand_node);
 
             rand_numNodes -= 1;
@@ -76,14 +77,15 @@ public class Map
         {
             System.out.println(nodeList.get(i).getName());
         }
-        
     }
 
     public void printPathList()
     {
         for(int i = 0; i < numNodes; i++)
         {
-            System.out.println(nodeList.get(i).getPath().getEndNode().getName());
+            String nodeName = nodeList.get(i).getPath().getEndNode().getName();
+            int nodeDistance = nodeList.get(i).getPath().getDistance();
+            System.out.printf("%s --> %d\n", nodeName, nodeDistance);
         }
         
     }

@@ -38,6 +38,11 @@ public class PathData
         this.distance = distance;
     }
 
+    public int getDistance()
+    {
+        return distance;
+    }
+
     public void setStartNode(NodeData startNode)
     {
         this.startNode = new NodeData(startNode);
