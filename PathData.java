@@ -1,13 +1,15 @@
 public class PathData 
 {
+    private String pathName;
     private int distance;
     private NodeData startNode;
     private NodeData endNode;
 
     public PathData()
-    {     
+    {
         startNode = new NodeData();
         endNode = new NodeData();
+        pathName = "";
         distance = 0;
     }
 
@@ -15,22 +17,30 @@ public class PathData
     {
         this.startNode = startNode;
         this.endNode = startNode;
+        pathName = startNode.getName() + endNode.getName();
         distance = 0;
     }
     
+    public PathData(int distance, NodeData startNode, NodeData endNode)
+    {  
+        startNode = new NodeData(startNode);
+        endNode = new NodeData(endNode);
+        pathName = startNode.getName() + endNode.getName();
+        this.distance = distance;
+    }
+
     // Copy Constructor
     public PathData(PathData path)
     {
         this.distance = path.distance;
         this.startNode = path.startNode;
         this.endNode = path.endNode;
+        pathName = path.startNode.getName() + path.endNode.getName();
     }
 
-    public PathData(int distance, NodeData startNode, NodeData endNode)
+    public int getDistance()
     {
-        this.distance = distance;
-        startNode = new NodeData(startNode);
-        endNode = new NodeData(endNode);
+        return distance;
     }
 
     public void setDistance()
@@ -44,9 +54,14 @@ public class PathData
         this.distance = (int) Math.sqrt(sum);
     }
 
-    public int getDistance()
+    public String getPathName()
     {
-        return distance;
+        return pathName;
+    }
+
+    public void setPathName(String pathName)
+    {
+        this.pathName = pathName;
     }
 
     public void setStartNode(NodeData startNode)
@@ -68,5 +83,4 @@ public class PathData
     {
         return endNode;
     }
-
 }

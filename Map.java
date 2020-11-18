@@ -41,8 +41,8 @@ public class Map
         nodeList = new ArrayList<>();
         for(int i = 0; i < numNodes; i++)
         {
-            int rand_xPos = rand.nextInt(10);
-            int rand_yPos = rand.nextInt(10);
+            int rand_xPos = rand.nextInt(11);
+            int rand_yPos = rand.nextInt(11);
 
             String nodeName = Character.toString(nameList.get(i));
             NodeData newNode = new NodeData(nodeName, rand_xPos, rand_yPos);
@@ -59,13 +59,20 @@ public class Map
         for(int i = 0; i < numNodes; i++)
         {
             int rand_node = rand.nextInt(rand_numNodes);
+            String startNodeName = nodeList.get(i).getPath().getStartNode().getName();
+            String endNodeName = endNodeList.get(rand_node).getName();
 
-            while(nodeList.get(i).getName() == endNodeList.get(rand_node).getName())
+            String pathName = startNodeName + endNodeName;
+
+            while(startNodeName.equals(endNodeName) || checkPath(pathName, i))
             {
                 rand_node = rand.nextInt(rand_numNodes);
+                endNodeName = endNodeList.get(rand_node).getName();
+                pathName = startNodeName + endNodeName;
             }
 
             nodeList.get(i).getPath().setEndNode(endNodeList.get(rand_node));
+            nodeList.get(i).getPath().setPathName(pathName);
             nodeList.get(i).getPath().setDistance();
             endNodeList.remove(rand_node);
 
@@ -73,6 +80,23 @@ public class Map
         }
     }
     
+    public boolean checkPath(String pathName, int counter)
+    {
+        StringBuilder input = new StringBuilder();
+        input.append(pathName);
+        input = input.reverse();
+
+        for(int i = 0; i < counter; i++)
+        {
+            String testPathName = nodeList.get(i).getPath().getPathName();
+            if((input.toString()).equals(testPathName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void printNodeList()
     {
         for(int i = 0; i < numNodes; i++)
@@ -86,10 +110,9 @@ public class Map
         for(int i = 0; i < numNodes; i++)
         {
             String startNode = nodeList.get(i).getPath().getStartNode().getName();
-            String endName = nodeList.get(i).getPath().getEndNode().getName();
+            String endNode = nodeList.get(i).getPath().getEndNode().getName();
             int nodeDistance = nodeList.get(i).getPath().getDistance();
-            System.out.printf("%s -- > %s = %d\n", startNode, endName, nodeDistance);
+            System.out.printf("%s -- > %s = %d\n", startNode, endNode, nodeDistance);
         }
-        
     }
 }

@@ -1,38 +1,32 @@
 public class NodeData 
 {
-    private String name;
+    private String nodeName;
     private int xPos;
     private int yPos;
     private PathData path;
 
     public NodeData()
     {
-        name = "";
+        nodeName = "";
         xPos = 0;
         yPos = 0;
         path = new PathData();
     }
 
-    // public NodeData(String name)
-    // {
-    //     this.name = name;
-    //     xPos = 0;
-    //     yPos = 0;
-    //     path = new PathData(this);
-    // }
-
     public NodeData(String name, int xPos, int yPos)
     {
-        this.name = name;
+        this.nodeName = name;
         this.xPos = xPos;
         this.yPos = yPos;
-        path = new PathData(this);
+        path = new PathData(this); 
     }
 
     // Copy Constructor
     public NodeData(NodeData node)
     {
-        name = node.name;
+        this.nodeName = node.nodeName;
+        this.xPos = node.xPos;
+        this.yPos = node.yPos;
     }
 
     public NodeData(PathData path)
@@ -42,7 +36,7 @@ public class NodeData
 
     public String getName()
     {
-        return name;
+        return nodeName;
     }
 
     public int getXPos()
