@@ -97,6 +97,11 @@ public class Map
         return false;
     }
 
+    public static ArrayList<NodeData> getNodeList()
+    {
+        return nodeList;
+    }
+
     public void printNodeList()
     {
         for(int i = 0; i < numNodes; i++)
