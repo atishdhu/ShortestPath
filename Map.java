@@ -15,7 +15,7 @@ public class Map
         initNameList();
         numNodes = 0;
         initNodeList();
-        initPathList();     
+        initEdgeList();     
     }
 
     public Map(int numNodes)
@@ -24,7 +24,7 @@ public class Map
         initNameList();
         this.numNodes = numNodes;
         initNodeList();
-        initPathList();    
+        initEdgeList();    
     }
 
     public void initNameList()
@@ -50,7 +50,7 @@ public class Map
         }
     }
 
-    public void initPathList()
+    public void initEdgeList()
     {
         endNodeList = new ArrayList<>(nodeList);
 
@@ -59,37 +59,37 @@ public class Map
         for(int i = 0; i < numNodes; i++)
         {
             int rand_node = rand.nextInt(rand_numNodes);
-            String startNodeName = nodeList.get(i).getPath().getStartNode().getName();
+            String startNodeName = nodeList.get(i).getEdge().getStartNode().getName();
             String endNodeName = endNodeList.get(rand_node).getName();
 
-            String pathName = startNodeName + endNodeName;
+            String edgeName = startNodeName + endNodeName;
 
-            while(startNodeName.equals(endNodeName) || checkPath(pathName, i))
+            while(startNodeName.equals(endNodeName) || checkEdge(edgeName, i))
             {
                 rand_node = rand.nextInt(rand_numNodes);
                 endNodeName = endNodeList.get(rand_node).getName();
-                pathName = startNodeName + endNodeName;
+                edgeName = startNodeName + endNodeName;
             }
 
-            nodeList.get(i).getPath().setEndNode(endNodeList.get(rand_node));
-            nodeList.get(i).getPath().setPathName(pathName);
-            nodeList.get(i).getPath().setDistance();
+            nodeList.get(i).getEdge().setEndNode(endNodeList.get(rand_node));
+            nodeList.get(i).getEdge().setEdgeName(edgeName);
+            nodeList.get(i).getEdge().setDistance();
             endNodeList.remove(rand_node);
 
             rand_numNodes -= 1;
         }
     }
     
-    public boolean checkPath(String pathName, int counter)
+    public boolean checkEdge(String edgeName, int counter)
     {
         StringBuilder input = new StringBuilder();
-        input.append(pathName);
+        input.append(edgeName);
         input = input.reverse();
 
         for(int i = 0; i < counter; i++)
         {
-            String testPathName = nodeList.get(i).getPath().getPathName();
-            if((input.toString()).equals(testPathName))
+            String testEdgeName = nodeList.get(i).getEdge().getEdgeName();
+            if((input.toString()).equals(testEdgeName))
             {
                 return true;
             }
@@ -105,14 +105,14 @@ public class Map
         }
     }
 
-    public void printPathList()
+    public void printEdgeList()
     {
         for(int i = 0; i < numNodes; i++)
         {
-            String startNode = nodeList.get(i).getPath().getStartNode().getName();
-            String endNode = nodeList.get(i).getPath().getEndNode().getName();
-            int nodeDistance = nodeList.get(i).getPath().getDistance();
-            System.out.printf("%s -- > %s = %d\n", startNode, endNode, nodeDistance);
+            String startNode = nodeList.get(i).getEdge().getStartNode().getName();
+            String endNode = nodeList.get(i).getEdge().getEndNode().getName();
+            int edgeDistance = nodeList.get(i).getEdge().getDistance();
+            System.out.printf("%s -- > %s = %d\n", startNode, endNode, edgeDistance);
         }
     }
 }

@@ -1,41 +1,41 @@
-public class PathData 
+public class EdgeData 
 {
-    private String pathName;
+    private String edgeName;
     private int distance;
     private NodeData startNode;
     private NodeData endNode;
 
-    public PathData()
+    public EdgeData()
     {
         startNode = new NodeData();
         endNode = new NodeData();
-        pathName = "";
+        edgeName = "";
         distance = 0;
     }
 
-    public PathData(NodeData startNode)
+    public EdgeData(NodeData startNode)
     {
         this.startNode = startNode;
         this.endNode = startNode;
-        pathName = startNode.getName() + endNode.getName();
+        edgeName = startNode.getName() + endNode.getName();
         distance = 0;
     }
     
-    public PathData(int distance, NodeData startNode, NodeData endNode)
+    public EdgeData(int distance, NodeData startNode, NodeData endNode)
     {  
         startNode = new NodeData(startNode);
         endNode = new NodeData(endNode);
-        pathName = startNode.getName() + endNode.getName();
+        edgeName = startNode.getName() + endNode.getName();
         this.distance = distance;
     }
 
     // Copy Constructor
-    public PathData(PathData path)
+    public EdgeData(EdgeData edge)
     {
-        this.distance = path.distance;
-        this.startNode = path.startNode;
-        this.endNode = path.endNode;
-        pathName = path.startNode.getName() + path.endNode.getName();
+        this.distance = edge.distance;
+        this.startNode = edge.startNode;
+        this.endNode = edge.endNode;
+        edgeName = edge.startNode.getName() + edge.endNode.getName();
     }
 
     public int getDistance()
@@ -54,14 +54,14 @@ public class PathData
         this.distance = (int) Math.sqrt(sum);
     }
 
-    public String getPathName()
+    public String getEdgeName()
     {
-        return pathName;
+        return edgeName;
     }
 
-    public void setPathName(String pathName)
+    public void setEdgeName(String edgeName)
     {
-        this.pathName = pathName;
+        this.edgeName = edgeName;
     }
 
     public void setStartNode(NodeData startNode)

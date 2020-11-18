@@ -3,14 +3,14 @@ public class NodeData
     private String nodeName;
     private int xPos;
     private int yPos;
-    private PathData path;
+    private EdgeData edge;
 
     public NodeData()
     {
         nodeName = "";
         xPos = 0;
         yPos = 0;
-        path = new PathData();
+        edge = new EdgeData();
     }
 
     public NodeData(String name, int xPos, int yPos)
@@ -18,7 +18,7 @@ public class NodeData
         this.nodeName = name;
         this.xPos = xPos;
         this.yPos = yPos;
-        path = new PathData(this); 
+        edge = new EdgeData(this); 
     }
 
     // Copy Constructor
@@ -29,9 +29,9 @@ public class NodeData
         this.yPos = node.yPos;
     }
 
-    public NodeData(PathData path)
+    public NodeData(EdgeData edge)
     {
-        this.path = new PathData(path);
+        this.edge = new EdgeData(edge);
     }
 
     public String getName()
@@ -49,13 +49,13 @@ public class NodeData
         return yPos;
     }
 
-    public void setPath(PathData path)
+    public void setEdge(EdgeData edge)
     {
-        this.path = new PathData(path);
+        this.edge = new EdgeData(edge);
     }
 
-    public PathData getPath()
+    public EdgeData getEdge()
     {
-        return path;
+        return edge;
     }
 }
