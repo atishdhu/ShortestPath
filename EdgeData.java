@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+
 public class EdgeData 
 {
     private String edgeName;
     private int distance;
     private NodeData startNode;
     private NodeData endNode;
+    private ArrayList<NodeData> connectedNodesList;
 
     public EdgeData()
     {
@@ -11,22 +14,25 @@ public class EdgeData
         endNode = new NodeData();
         edgeName = "";
         distance = 0;
+        connectedNodesList = new ArrayList<>();
     }
 
     public EdgeData(NodeData startNode)
     {
         this.startNode = startNode;
         this.endNode = startNode;
-        edgeName = startNode.getName() + endNode.getName();
+        edgeName = startNode.getName() + "," + endNode.getName();
         distance = 0;
+        connectedNodesList = new ArrayList<>();
     }
     
     public EdgeData(int distance, NodeData startNode, NodeData endNode)
     {  
         startNode = new NodeData(startNode);
         endNode = new NodeData(endNode);
-        edgeName = startNode.getName() + endNode.getName();
+        edgeName = startNode.getName() + "," + endNode.getName();
         this.distance = distance;
+        connectedNodesList = new ArrayList<>();
     }
 
     // Copy Constructor
@@ -35,7 +41,8 @@ public class EdgeData
         this.distance = edge.distance;
         this.startNode = edge.startNode;
         this.endNode = edge.endNode;
-        edgeName = edge.startNode.getName() + edge.endNode.getName();
+        edgeName = edge.startNode.getName() + "," + edge.endNode.getName();
+        this.connectedNodesList = edge.connectedNodesList;
     }
 
     public int getDistance()
@@ -82,5 +89,27 @@ public class EdgeData
     public NodeData getEndNode()
     {
         return endNode;
+    }
+
+    public void addConnectedNode(NodeData node)
+    {
+        connectedNodesList.add(node);
+    }
+
+    public int getNumConnectedNodes()
+    {
+        return connectedNodesList.size();
+    }
+
+    public String printAllConnectedNodes()
+    {
+        StringBuilder connectedNodes = new StringBuilder();
+
+        for(int i = 0; i < getNumConnectedNodes(); i++)
+        {
+            connectedNodes.append(connectedNodesList.get(i).getName() + " ");
+        }
+
+        return connectedNodes.toString();
     }
 }

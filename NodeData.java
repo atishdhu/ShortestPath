@@ -4,6 +4,7 @@ public class NodeData
     private int xPos;
     private int yPos;
     private EdgeData edge;
+    
 
     public NodeData()
     {

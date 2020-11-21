@@ -9,5 +9,9 @@ public class Main
 
         System.out.println("Edge List");
         newMap.printEdgeList();
+
+        System.out.println();
+        System.out.println("Connected Nodes:");
+        newMap.printAllConnections();
     }
 }

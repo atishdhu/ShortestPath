@@ -72,12 +72,14 @@ public class Map
             }
 
             nodeList.get(i).getEdge().setEndNode(endNodeList.get(rand_node));
+            nodeList.get(i).getEdge().addConnectedNode(endNodeList.get(rand_node));
             nodeList.get(i).getEdge().setEdgeName(edgeName);
             nodeList.get(i).getEdge().setDistance();
             endNodeList.remove(rand_node);
 
             rand_numNodes -= 1;
         }
+        addAllConnectedNodes();
     }
     
     public boolean checkEdge(String edgeName, int counter)
@@ -97,6 +99,25 @@ public class Map
         return false;
     }
 
+    public void addAllConnectedNodes()
+    {
+        for(int i = 0; i < nodeList.size(); i++)
+        {
+            String nodeName = nodeList.get(i).getName();
+
+            for(int j = 0; j < nodeList.size(); j++)
+            {
+                String tempNodeName = nodeList.get(j).getEdge().getEdgeName();
+                int index = tempNodeName.indexOf(nodeName);
+
+                if((i != j) && index != -1)
+                {
+                    nodeList.get(i).getEdge().addConnectedNode(nodeList.get(j));
+                }
+            }
+        }
+    }
+
     public static ArrayList<NodeData> getNodeList()
     {
         return nodeList;
@@ -106,8 +127,9 @@ public class Map
     {
         for(int i = 0; i < numNodes; i++)
         {
-            System.out.println(nodeList.get(i).getName());
+            System.out.print(nodeList.get(i).getName() + " ");
         }
+        System.out.println("\n");
     }
 
     public void printEdgeList()
@@ -119,5 +141,17 @@ public class Map
             int edgeDistance = nodeList.get(i).getEdge().getDistance();
             System.out.printf("%s -- > %s = %d\n", startNode, endNode, edgeDistance);
         }
+    }
+
+    public void printAllConnections()
+    {
+        StringBuilder nodeName = new StringBuilder();
+        for(int i = 0; i < numNodes; i++)
+        {
+            NodeData node = nodeList.get(i);
+            nodeName.append(node.getName() + " --> ");
+            nodeName.append(node.getEdge().printAllConnectedNodes() + "\n");
+        }
+        System.out.println(nodeName.toString());
     }
 }

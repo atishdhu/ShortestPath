@@ -1,6 +1,6 @@
 // import java.util.ArrayList;
 
-// public class PathFinding 
+// public class PathFinding
 // {
 //     private ArrayList<NodeData> nodeList;
 //     private NodeData sourceNode;
@@ -48,8 +48,6 @@
 //             }
 //         }
 //     }
-
-    
 
 //     public void Dijkstra()
 //     {
