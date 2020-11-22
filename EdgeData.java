@@ -101,6 +101,21 @@ public class EdgeData
         return connectedNodesList.size();
     }
 
+    public ArrayList<NodeData> getConnectedNodeList()
+    {
+        return connectedNodesList;
+    }
+
+    public void popConnectedNode(int index)
+    {
+        connectedNodesList.remove(index);
+    }
+
+    public void popConnectedNode(NodeData node)
+    {
+        connectedNodesList.remove(node);
+    }
+
     public String printAllConnectedNodes()
     {
         StringBuilder connectedNodes = new StringBuilder();
