@@ -34,7 +34,8 @@ public class ShortestRoute
             return 1;
         }
 
-        newPath.addNode(pathStart);
+        if(pathStart.equals(sourceNode))
+            newPath.addNode(pathStart);
 
         ArrayList<NodeData> connectedNodes = new ArrayList<>(pathStart.getEdge().getConnectedNodeList());
 

@@ -2,7 +2,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Map newMap = new Map(5);
+        Map newMap = new Map(10);
     
         System.out.println("NodeList");
         newMap.printNodeList();
