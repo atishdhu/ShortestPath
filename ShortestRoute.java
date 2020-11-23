@@ -34,14 +34,13 @@ public class ShortestRoute
             return 1;
         }
 
-        if(pathStart.equals(sourceNode))
-            newPath.addNode(pathStart);
-
         ArrayList<NodeData> connectedNodes = new ArrayList<>(pathStart.getEdge().getConnectedNodeList());
 
+        newPath.addSettledNode(pathStart);
+        
         for(int i = 0; i < connectedNodes.size(); i++)
         {
-            if(connectedNodes.get(i).equals(sourceNode))
+            if(connectedNodes.get(i).equals(sourceNode) || newPath.findSettledNode(connectedNodes.get(i)))
             {
                 connectedNodes.remove(i);
                 pathStart.getEdge().popConnectedNode(i);
@@ -50,12 +49,20 @@ public class ShortestRoute
 
         pathStart.getEdge().popConnectedNode(0);
 
+        if(pathStart.equals(sourceNode))
+            newPath.addNode(pathStart);
+
         newPath.addNode(connectedNodes.get(0));
 
         if(connectedNodes.get(0).equals(destinationNode))
         {
             pathList.add(newPath);
-            newPath = new PathData();
+            if((sourceNode.getEdge().getNumConnectedNodes()) > 0)
+            {
+                newPath = new PathData();
+                getPaths(sourceNode);
+            }
+            
             return 1;
         }
         else
@@ -68,6 +75,9 @@ public class ShortestRoute
 
     public void printPath()
     {
-        pathList.get(0).printPath();
+        for(int i = 0; i < pathList.size(); i++)
+        {
+            pathList.get(i).printPath();
+        }
     }
 }

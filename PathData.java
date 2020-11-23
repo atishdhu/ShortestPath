@@ -4,17 +4,20 @@ public class PathData
 {
     private ArrayList<NodeData> path;
     private int totalDistance;
+    private ArrayList<NodeData> settledNodes;
 
     public PathData()
     {
         path = new ArrayList<>();
         totalDistance = 0;
+        settledNodes = new ArrayList<>();
     }
 
     public PathData(ArrayList<NodeData> newPath, int totalDistance)
     {
         this.path = new ArrayList<>(newPath);
         this.totalDistance = totalDistance;
+        this.settledNodes = new ArrayList<>();
     }
 
     public void setTotalDistance(int totalDistance)
@@ -38,6 +41,26 @@ public class PathData
     public ArrayList<NodeData> getpathList()
     {
         return path;
+    }
+
+    public void addSettledNode(NodeData node)
+    {
+        settledNodes.add(node);
+    }
+
+    public ArrayList<NodeData> getSettledNodes()
+    {
+        return settledNodes;
+    }
+
+    public boolean findSettledNode(NodeData node)
+    {
+        int index = path.indexOf(node);
+
+        if(index != -1)
+            return true;
+        
+        return false;
     }
 
     public void printPath()

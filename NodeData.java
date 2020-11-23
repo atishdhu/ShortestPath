@@ -3,7 +3,7 @@ public class NodeData
     private String nodeName;
     private int xPos;
     private int yPos;
-    private EdgeData edge;
+    private EdgeData edge; // Node edge data
     
 
     public NodeData()
@@ -19,7 +19,7 @@ public class NodeData
         this.nodeName = name;
         this.xPos = xPos;
         this.yPos = yPos;
-        edge = new EdgeData(this); 
+        edge = new EdgeData(this); // Initialise the edge with this node object so that the start node equals itself
     }
 
     // Copy Constructor
