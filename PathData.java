@@ -24,23 +24,29 @@ public class PathData
         this.settledNodeList = new ArrayList<>();
     }
 
-    public void setTotalDistance(int totalDistance)
-    {
-        this.totalDistance = totalDistance;
-    }
-
     public int getTotalDistance()
     {
         return totalDistance;
     }
 
-    
+    public void setDistance()
+    {
+
+        for(int i = 0; i < path.size() - 1; i++)
+        {
+            int x1 = path.get(i).getXPos();
+            int x2 = path.get(i+1).getXPos();
+            int y1 = path.get(i).getYPos();
+            int y2 = path.get(i+1).getYPos();
+
+            double distance = Math.sqrt(Math.pow((x2 - x1), 2.0) + Math.pow((y2 - y1), 2.0));
+            this.totalDistance += distance;
+        }
+    }
+
     public void addNode(NodeData node)
     {
         path.add(node);
-        
-        if(path.size() > 1)
-            this.totalDistance += node.getEdge().getDistance();
     }
 
     public ArrayList<NodeData> getpathList()
@@ -68,14 +74,17 @@ public class PathData
         return false;
     }
 
-    public void printPath()
+    public String getPath()
     {
-        System.out.println("Shortest Path:");
+        String str = "";
+
         for(int i = 0; i < path.size(); i++)
         {
-            System.out.print(path.get(i).getName() + " ");
+            str += path.get(i).getName() + " ";
         }
-        System.out.printf("Distance: %d\n", totalDistance);
-    }
 
+        str += "\nDistance: " + totalDistance + "\n";
+
+        return str;
+    }
 }

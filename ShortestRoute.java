@@ -78,6 +78,7 @@ public class ShortestRoute
         if(connectedNodes.get(0).equals(destinationNode))
         {
             pathList.add(newPath);  // Add the path to pathList
+            newPath.setDistance();
 
             // Checks if there are more connected nodes to the sourceNode
             if((sourceNode.getEdge().getNumConnectedNodes()) > 0)
@@ -97,11 +98,30 @@ public class ShortestRoute
         return 1;
     }
 
+    public PathData getShortestPath()
+    {
+        PathData shortestRoute = pathList.get(0);
+        for(int i = 1; i < pathList.size(); i++)
+        {
+            if(pathList.get(i).getTotalDistance() < shortestRoute.getTotalDistance())
+                shortestRoute = pathList.get(i);
+        }
+
+        return shortestRoute;
+    }
+
     public void printPath()
     {
+        System.out.println("All Paths:");
         for(int i = 0; i < pathList.size(); i++)
         {
-            pathList.get(i).printPath();
+            System.out.printf("Path %d : %s\n", i + 1 , (pathList.get(i).getPath()));
         }
+    }
+
+    public void printShortestPath(PathData shortestRoute)
+    {
+        System.out.println("Shortest Path:");
+        System.out.printf("%s\n", shortestRoute.getPath());
     }
 }
