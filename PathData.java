@@ -1,23 +1,27 @@
+/*This class defines a path(route)*/
+
 import java.util.ArrayList;
 
 public class PathData
 {
-    private ArrayList<NodeData> path;
-    private int totalDistance;
-    private ArrayList<NodeData> settledNodes;
+    private ArrayList<NodeData> path;               // Stores all the nodes for one path
+    private int totalDistance;              
+    private ArrayList<NodeData> settledNodeList;    // Stores the visited nodes
 
+    // Constructor #1
     public PathData()
     {
         path = new ArrayList<>();
         totalDistance = 0;
-        settledNodes = new ArrayList<>();
+        settledNodeList = new ArrayList<>();
     }
 
+    // Constructor #2
     public PathData(ArrayList<NodeData> newPath, int totalDistance)
     {
         this.path = new ArrayList<>(newPath);
         this.totalDistance = totalDistance;
-        this.settledNodes = new ArrayList<>();
+        this.settledNodeList = new ArrayList<>();
     }
 
     public void setTotalDistance(int totalDistance)
@@ -30,6 +34,7 @@ public class PathData
         return totalDistance;
     }
 
+    
     public void addNode(NodeData node)
     {
         path.add(node);
@@ -45,12 +50,12 @@ public class PathData
 
     public void addSettledNode(NodeData node)
     {
-        settledNodes.add(node);
+        settledNodeList.add(node);
     }
 
     public ArrayList<NodeData> getSettledNodes()
     {
-        return settledNodes;
+        return settledNodeList;
     }
 
     public boolean findSettledNode(NodeData node)

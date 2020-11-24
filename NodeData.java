@@ -1,3 +1,5 @@
+/*This class defines a node*/
+
 public class NodeData 
 {
     private String nodeName;
@@ -5,7 +7,7 @@ public class NodeData
     private int yPos;
     private EdgeData edge; // Node edge data
     
-
+    // Constructor #1
     public NodeData()
     {
         nodeName = "";
@@ -14,6 +16,7 @@ public class NodeData
         edge = new EdgeData();
     }
 
+    // Constructor #2
     public NodeData(String name, int xPos, int yPos)
     {
         this.nodeName = name;
@@ -28,11 +31,6 @@ public class NodeData
         this.nodeName = node.nodeName;
         this.xPos = node.xPos;
         this.yPos = node.yPos;
-    }
-
-    public NodeData(EdgeData edge)
-    {
-        this.edge = new EdgeData(edge);
     }
 
     public String getName()
