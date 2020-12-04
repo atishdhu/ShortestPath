@@ -1,41 +1,50 @@
 /*This class defines a node*/
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class NodeData 
 {
     private String nodeName;
+    private Random rand; 
     private int xPos;
     private int yPos;
-    private EdgeData edge; // Node edge data
+    private ArrayList<NodeData> neighbourNodesList; // Stores all nodes connected to this node
+    private final int positionRange = 11;           // Range between 0 and 10
     
     // Constructor #1
     public NodeData()
     {
+        rand = new Random();
         nodeName = "";
-        xPos = 0;
-        yPos = 0;
-        edge = new EdgeData();
+        xPos = generateRandomPosition();
+        yPos = generateRandomPosition();
+        neighbourNodesList = new ArrayList<>();
     }
 
     // Constructor #2
-    public NodeData(String name, int xPos, int yPos)
+    public NodeData(String name, ArrayList<NodeData> neighbours)
     {
+        this.rand = new Random();
         this.nodeName = name;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        edge = new EdgeData(this); // Initialise the edge with this node object so that the start node equals itself
-    }
-
-    // Copy Constructor
-    public NodeData(NodeData node)
-    {
-        this.nodeName = node.nodeName;
-        this.xPos = node.xPos;
-        this.yPos = node.yPos;
+        this.xPos = generateRandomPosition();
+        this.yPos = generateRandomPosition();
+        this.neighbourNodesList = new ArrayList<>(neighbours);
     }
 
     public String getName()
     {
         return nodeName;
+    }
+
+    public void setName(String nodeName)
+    {
+        this.nodeName = nodeName;
+    }
+
+    public int generateRandomPosition()
+    {
+        return rand.nextInt(positionRange);
     }
 
     public int getXPos()
@@ -48,13 +57,18 @@ public class NodeData
         return yPos;
     }
 
-    public void setEdge(EdgeData edge)
+    public void setNeighbours(ArrayList<NodeData> neighbours)
     {
-        this.edge = new EdgeData(edge);
+        this.neighbourNodesList = neighbours;
     }
 
-    public EdgeData getEdge()
+    public void addNeighbour(NodeData neighbour)
     {
-        return edge;
+        this.neighbourNodesList.add(neighbour);
+    }
+
+    public ArrayList<NodeData> getNeighbours()
+    {
+        return neighbourNodesList;
     }
 }
