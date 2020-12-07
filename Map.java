@@ -15,8 +15,8 @@ public class Map
     public Map()
     {
         rand = new Random();
-        initNameList();         // Initialize namelist with data to use as node names
         numNodes = 0;
+        initNameList();         // Initialize namelist with data to use as node names 
         initNodeList();         // Initialize the nodes generated with data
         initNeighboursList();
     }
@@ -32,6 +32,7 @@ public class Map
     }
 
     // Populate namelist with all the english alphabets in capital letters (A-Z)
+    // Only populate the list depending on the number of nodes e.g for 3 nodes only A, B, C will be generated
     // These will be used to name the nodes generated
     public void initNameList()
     {
@@ -96,7 +97,6 @@ public class Map
                     neighbourCounter++;
                 }
             }
-            // updateNeighboursList(currentNode); // Finds all the connectedNodes and updates the appropriate node connectedNodeList
             neighboursList = new ArrayList<>(nodeList);    // Copy nodeList to endNodeList 
             Collections.shuffle(neighboursList);
         }   
@@ -117,27 +117,26 @@ public class Map
     }
 
     // Updates the connectedNodeList with all the connected Nodes
-    public void updateNeighboursList(NodeData currentNode)
-    {
-        ArrayList<NodeData> connectedNodeList = new ArrayList<>(currentNode.getNeighbours());
+    // public void updateNeighboursList(NodeData currentNode)
+    // {
+    //     ArrayList<NodeData> connectedNodeList = new ArrayList<>(currentNode.getNeighbours());
 
-        // Loop through nodeList to get ith node's name in nodeList
-        for(int i = 0; i < connectedNodeList.size(); i++)
-        {
-            NodeData evaluationNode = connectedNodeList.get(i);    // Assign the name of the ith node in nodeList
+    //     for(int i = 0; i < connectedNodeList.size(); i++)
+    //     {
+    //         NodeData evaluationNode = connectedNodeList.get(i);
 
-            if(evaluationNode.getNeighbours().isEmpty())
-            {
-                int nodeIndex = nodeList.indexOf(evaluationNode);
-                nodeList.get(nodeIndex).addNeighbour(currentNode);
-            }
-            else if(!isNeighbourAlreadyConnected(currentNode, evaluationNode))
-            {
-                int nodeIndex = nodeList.indexOf(evaluationNode);
-                nodeList.get(nodeIndex).addNeighbour(currentNode);
-            }
-        }
-    }
+    //         if(evaluationNode.getNeighbours().isEmpty())
+    //         {
+    //             int nodeIndex = nodeList.indexOf(evaluationNode);
+    //             nodeList.get(nodeIndex).addNeighbour(currentNode);
+    //         }
+    //         else if(!isNeighbourAlreadyConnected(currentNode, evaluationNode))
+    //         {
+    //             int nodeIndex = nodeList.indexOf(evaluationNode);
+    //             nodeList.get(nodeIndex).addNeighbour(currentNode);
+    //         }
+    //     }
+    // }
 
     public void addAllConnectedNeighbours()
     {

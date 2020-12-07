@@ -12,5 +12,8 @@ public class Main
         System.out.println("Edge List");
         newMap.printNeighbourNodes();
 
+        ShortestRoute path = new ShortestRoute("A");
+        NodeData sourceNode = path.getNode("A");
+        path.getPaths(sourceNode);
     }
 }
