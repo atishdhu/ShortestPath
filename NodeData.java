@@ -9,7 +9,7 @@ public class NodeData
     private String nodeName;
     private int xPos;
     private int yPos;
-    private boolean hasDestinationNodeNeighbour;
+    private boolean visited;
     private ArrayList<NodeData> neighbourNodesList; // Stores all nodes connected to this node
     private ArrayList<NodeData> unsettledNodes;
     private final int positionRange = 11;           // Range between 0 and 10 for x/y coordinates
@@ -21,7 +21,7 @@ public class NodeData
         nodeName = "";
         xPos = generateRandomPosition();
         yPos = generateRandomPosition();
-        hasDestinationNodeNeighbour = false;
+        visited = false;
         neighbourNodesList = new ArrayList<>();
         unsettledNodes = new ArrayList<>();
     }
@@ -33,7 +33,7 @@ public class NodeData
         this.nodeName = name;
         this.xPos = generateRandomPosition();
         this.yPos = generateRandomPosition();
-        this.hasDestinationNodeNeighbour = false;
+        this.visited = false;
         this.neighbourNodesList = new ArrayList<>(neighbours);
         this.unsettledNodes = new ArrayList<>(neighbours);
     }
@@ -90,34 +90,24 @@ public class NodeData
         unsettledNodes.remove(node);
     }
 
-    public void setHasDestinationNode(boolean isDestinationNode)
+    public void setVisited(boolean visited)
     {
-        this.hasDestinationNodeNeighbour = isDestinationNode;
+        this.visited = visited;
     }
 
-    public boolean hasDestinationAsNeighbour()
+    public boolean isVisited()
     {
-        return hasDestinationNodeNeighbour;
-    }
-
-    public void setupPreviousNode()
-    {
-        this.previousNode = new NodeData();
-    }
-
-    public void setPreviousNode(NodeData previousNode)
-    {
-        this.previousNode = previousNode;
-    }
-
-    public NodeData getPreviousNode()
-    {
-        return previousNode;
+        return visited;
     }
 
     public void resetAll()
     {
-        hasDestinationNodeNeighbour = false;
+        visited = false;
+        unsettledNodes = new ArrayList<>(neighbourNodesList);
+    }
+
+    public void resetNeighbours()
+    {
         unsettledNodes = new ArrayList<>(neighbourNodesList);
     }
 }
