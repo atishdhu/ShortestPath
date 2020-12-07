@@ -4,7 +4,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Map newMap = new Map(5);
+        Map newMap = new Map(3);
     
         System.out.println("NodeList");
         newMap.printNodeList();
@@ -15,5 +15,8 @@ public class Main
         ShortestRoute path = new ShortestRoute("A");
         NodeData sourceNode = path.getNode("A");
         path.getPaths(sourceNode);
+
+        System.out.println();
+        path.printPath();
     }
 }

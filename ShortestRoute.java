@@ -70,7 +70,7 @@ public class ShortestRoute
         {
             evaluationNode = pathStart.getUnsettledNodes().get(1);
         }
-        else
+        else if(pathStart != sourceNode)
         {
             pathStart.popUnsettledNode(evaluationNode);
             newPath = new PathData();

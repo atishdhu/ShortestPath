@@ -83,7 +83,7 @@ public class PathData
             str += path.get(i).getName() + " ";
         }
 
-        str += "\nDistance: " + totalDistance + "\n";
+        // str += "\nDistance: " + totalDistance + "\n";
 
         return str;
     }
