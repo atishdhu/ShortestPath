@@ -36,14 +36,26 @@ public class ShortestRoute
     }
 
     // This method finds all possible paths from sourceNode to destinationNode
-    public void getPaths(NodeData pathStart)
+    public int getPaths(NodeData pathStart)
     {    
         if(pathStart.equals(sourceNode))
         {
-            newPath.addNode(pathStart);
-
             if(pathStart.getUnsettledNodes().size() == 0)
-                return;
+            {
+                if(destinationCounter < Map.getNodeList().size()-2)
+                {
+                    destinationCounter++;
+                }
+                else
+                    return 1;
+
+                for(int i = 0; i < Map.getNodeList().size(); i++)
+                {
+                    Map.getNodeList().get(i).resetAll();
+                }
+            }
+            newPath = new PathData();
+            newPath.addNode(pathStart);
         }
 
         newPath.addSettledNode(pathStart);
@@ -52,30 +64,68 @@ public class ShortestRoute
 
         pathStart.getUnsettledNodes().remove(sourceNode);
 
+        int evalIndex = 0;
+
         try
         {
-            evaluationNode = pathStart.getUnsettledNodes().get(0);
+            evaluationNode = pathStart.getUnsettledNodes().get(evalIndex);
         }
         catch(Exception e)
         {
             newPath = new PathData();
-            getPaths(sourceNode);
+            return getPaths(sourceNode);
         }
 
-        if(newPath.getSettledNodes().indexOf(evaluationNode) == -1)
+        while(newPath.getSettledNodes().indexOf(evaluationNode) > -1)
         {
-            evaluationNode = pathStart.getUnsettledNodes().get(0);
+            evalIndex++;
+            try
+            {
+                evaluationNode = pathStart.getUnsettledNodes().get(evalIndex);  
+            }
+            catch(Exception e)
+            {
+                if(evalIndex > evaluationNode.getUnsettledNodes().size() - 1)
+                {
+                    if(!evaluationNode.getUnsettledNodes().isEmpty())
+                    {
+                        evaluationNode = pathStart.getUnsettledNodes().get(0);
+                        pathStart.popUnsettledNode(evaluationNode);
+                        newPath = new PathData();
+                        return getPaths(sourceNode);
+                    }
+                    else
+                    {
+                        newPath = new PathData();
+                        return getPaths(sourceNode);
+                    }
+
+                // System.out.println();
+                // System.out.println("Evaluation Node is Empty");
+                // System.out.println(e + "\n");
+                // System.out.printf("Index: %d\n", evalIndex);
+                // System.out.printf("pathStart: %s\n", pathStart.getName());
+                // System.out.printf("evaluationNode: %s\n", evaluationNode.getName());
+                // pathList.add(newPath);
+                // printPath();
+                // System.exit(1);         
+            }
         }
-        else if(pathStart.getUnsettledNodes().size() > 1)
-        {
-            evaluationNode = pathStart.getUnsettledNodes().get(1);
-        }
-        else if(pathStart != sourceNode)
-        {
-            pathStart.popUnsettledNode(evaluationNode);
-            newPath = new PathData();
-            getPaths(sourceNode);
-        }
+
+        // if(newPath.getSettledNodes().indexOf(evaluationNode) == -1)
+        // {
+        //     evaluationNode = pathStart.getUnsettledNodes().get(0);
+        // }
+        // else if(pathStart.getUnsettledNodes().size() > 1)
+        // {
+        //     evaluationNode = pathStart.getUnsettledNodes().get(1);
+        // }
+        // else if(pathStart != sourceNode)
+        // {
+        //     pathStart.popUnsettledNode(evaluationNode);
+        //     newPath = new PathData();
+        //     return getPaths(sourceNode);
+        // }
 
         if(evaluationNode.equals(getDestinationNode()))
         {
@@ -83,7 +133,7 @@ public class ShortestRoute
             newPath.addNode(evaluationNode);
             pathList.add(newPath);
             newPath = new PathData();
-            getPaths(sourceNode);
+            return getPaths(sourceNode);
         }
         else if(!evaluationNode.getUnsettledNodes().isEmpty())
         {
@@ -99,13 +149,13 @@ public class ShortestRoute
             {
                 if(sourceNode.getUnsettledNodes().size() == 0)
                 {
-                    if(destinationCounter < Map.getNodeList().size()-1)
+                    if(destinationCounter < Map.getNodeList().size()-2)
                     {
                         destinationCounter++;
                         newPath = new PathData();
                     }
                     else
-                        return;
+                        return 1;
 
                     for(int i = 0; i < Map.getNodeList().size(); i++)
                     {
@@ -125,9 +175,10 @@ public class ShortestRoute
                     }
                 }
             }
-
-            getPaths(sourceNode);
         }
+            return getPaths(sourceNode);
+        }
+        return 1;
     }
 
     public NodeData getDestinationNode()
