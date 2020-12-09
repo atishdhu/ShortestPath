@@ -66,15 +66,7 @@ public class ShortestRoute
 
         int evalIndex = 0;
 
-        try
-        {
-            evaluationNode = pathStart.getUnsettledNodes().get(evalIndex);
-        }
-        catch(Exception e)
-        {
-            newPath = new PathData();
-            return getPaths(sourceNode);
-        }
+        evaluationNode = pathStart.getUnsettledNodes().get(evalIndex);
 
         while(newPath.getSettledNodes().indexOf(evaluationNode) > -1)
         {
@@ -99,16 +91,7 @@ public class ShortestRoute
                         newPath = new PathData();
                         return getPaths(sourceNode);
                     }
-
-                // System.out.println();
-                // System.out.println("Evaluation Node is Empty");
-                // System.out.println(e + "\n");
-                // System.out.printf("Index: %d\n", evalIndex);
-                // System.out.printf("pathStart: %s\n", pathStart.getName());
-                // System.out.printf("evaluationNode: %s\n", evaluationNode.getName());
-                // pathList.add(newPath);
-                // printPath();
-                // System.exit(1);         
+                }      
             }
         }
 
@@ -175,7 +158,6 @@ public class ShortestRoute
                     }
                 }
             }
-        }
             return getPaths(sourceNode);
         }
         return 1;
