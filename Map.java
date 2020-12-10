@@ -1,6 +1,6 @@
 /*This class generates a map of nodes and edges with random locations*/
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -64,43 +64,45 @@ public class Map
     // Updates the connectedNodeList in class EdgeData with all the nodes connected to one particular node
     public void initNeighboursList()
     {
-        ArrayList<NodeData> neighboursList = new ArrayList<>(nodeList);    // Copy nodeList to endNodeList 
-        Collections.shuffle(neighboursList);
+        // ArrayList<NodeData> neighboursList = new ArrayList<>(nodeList);    // Copy nodeList to endNodeList 
+        // Collections.shuffle(neighboursList);
 
-        // Loop throught endNodeList to find a random node to assign as endNode
-        for(int i = 0; i < neighboursList.size(); i++)
-        {
-            int neighbourCounter = 0;
+        // // Loop throught endNodeList to find a random node to assign as endNode
+        // for(int i = 0; i < neighboursList.size(); i++)
+        // {
+        //     int neighbourCounter = 0;
 
-            int rand_AmountOfNeighbours = rand.nextInt(numNodes);
-            if(rand_AmountOfNeighbours < 1)
-                rand_AmountOfNeighbours = 1;
+        //     int rand_AmountOfNeighbours = rand.nextInt(numNodes);
+        //     if(rand_AmountOfNeighbours < 1)
+        //         rand_AmountOfNeighbours = 1;
 
-            NodeData currentNode = nodeList.get(i);
+        //     NodeData currentNode = nodeList.get(i);
 
-            neighboursList.remove(currentNode);
+        //     neighboursList.remove(currentNode);
 
-            for(int j = 0; j < neighboursList.size(); j++)
-            {
-                NodeData evaluationNode = neighboursList.get(j);  // Choose a random node from neighboursList to assign to the variable
+        //     for(int j = 0; j < neighboursList.size(); j++)
+        //     {
+        //         NodeData evaluationNode = neighboursList.get(j);  // Choose a random node from neighboursList to assign to the variable
             
-                if(neighbourCounter == rand_AmountOfNeighbours)
-                    break;
+        //         if(neighbourCounter == rand_AmountOfNeighbours)
+        //             break;
 
-                if((isNeighbourAlreadyConnected(currentNode, evaluationNode)))
-                {
-                    continue;
-                }
-                else
-                {
-                    currentNode.addNeighbour(neighboursList.get(j));
-                    neighbourCounter++;
-                }
-            }
-            neighboursList = new ArrayList<>(nodeList);    // Copy nodeList to endNodeList 
-            Collections.shuffle(neighboursList);
-        }   
-        addAllConnectedNeighbours();
+        //         if((isNeighbourAlreadyConnected(currentNode, evaluationNode)))
+        //         {
+        //             continue;
+        //         }
+        //         else
+        //         {
+        //             currentNode.addNeighbour(neighboursList.get(j));
+        //             neighbourCounter++;
+        //         }
+        //     }
+        //     neighboursList = new ArrayList<>(nodeList);    // Copy nodeList to endNodeList 
+        //     Collections.shuffle(neighboursList);
+        // }   
+        // addAllConnectedNeighbours();
+
+        ArrayList<NodeData> neighboursList = new ArrayList<>(Arrays.asList());
     }
 
     public boolean isNeighbourAlreadyConnected(NodeData currentNode, NodeData evaluationNode)
