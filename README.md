@@ -1,5 +1,4 @@
 # ShortestPath
-DSA Assignment 1
 
 ## Abstract
 This program is designed to generate a map with a user defined number of nodes. These nodes will be connected at random and the algorithm can find the shortest path from any source node defined by the user and any destination node defined by the user.
